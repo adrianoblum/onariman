@@ -1,17 +1,11 @@
 #include <SFML\Graphics.hpp>
+#include "Menu.h"
+#include <iostream>
 
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(640, 480), "Onari");
-
-	while (window.isOpen())
-	{
-
-		window.clear();
-
-
-		window.display();
-
-	}
+	
+	Menu menu(SWIDTH, SHEIGHT);
+	menu.selection();
 }
