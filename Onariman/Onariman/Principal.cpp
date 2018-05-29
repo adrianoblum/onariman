@@ -10,7 +10,7 @@ Principal::Principal()
 	Collision::CreateTextureAndBitmask(textura_personagem, "Original_PacMan.png");
 	sprite_personagem.setTexture(textura_personagem);
 	sprite_personagem.setOrigin(sprite_personagem.getGlobalBounds().height/2, sprite_personagem.getGlobalBounds().width/2);
-	sprite_personagem.setPosition(10, 10);
+	sprite_personagem.setPosition(50, 50);
 	sprite_personagem.setScale(ESCALA_IMG, ESCALA_IMG);
 	posicao = sprite_personagem.getPosition();
 
@@ -22,6 +22,8 @@ Principal::Principal()
 	testeonaris.setPosition(SWIDTH/2, SHEIGHT/2);
 	testeonaris.setScale(ESCALA_MAPA, ESCALA_MAPA);
 
+	MOVX = 0;
+	MOVY = 0;
 
 }
 
@@ -33,6 +35,11 @@ Principal::~Principal()
 void Principal::loop(sf::RenderWindow* janela)
 {
 	sf::Event event;
+
+	sf::Time timePerFrame = sf::seconds(1.0f / 60.0f);
+	sf::Clock deltaClock;  
+	sf::Time timeSinceLastUpdate = sf::Time::Zero;
+
 	carrega_texto_temp();
 	while (janela->isOpen())
 	{
@@ -48,21 +55,25 @@ void Principal::loop(sf::RenderWindow* janela)
 					
 					sprite_personagem.setRotation(270);
 					sprite_personagem.setScale({ -ESCALA_IMG, ESCALA_IMG });
-					mover_teste(0, -MOV_SPEED);
+					MOVY = -MOV_SPEED;
+					MOVX = 0;
+					//mover_teste(0, -MOV_SPEED);
 					break;
 
 				case sf::Keyboard::Down:
 					
 					sprite_personagem.setRotation(90);
 					sprite_personagem.setScale({ -ESCALA_IMG, ESCALA_IMG });
-					mover_teste(0, MOV_SPEED);
+					MOVY = MOV_SPEED;
+					MOVX = 0;
 					break;
 
 				case sf::Keyboard::Right:
 					
 					sprite_personagem.setRotation(0);
 					sprite_personagem.setScale({ -ESCALA_IMG, ESCALA_IMG });
-					mover_teste(MOV_SPEED, 0);
+					MOVX = MOV_SPEED;
+					MOVY = 0;
 					break;
 				case sf::Keyboard::Left:
 					
@@ -71,7 +82,8 @@ void Principal::loop(sf::RenderWindow* janela)
 					//sprite_personagem.setOrigin({ sprite_personagem.getLocalBounds().width, 0 });
 					sprite_personagem.setScale({ ESCALA_IMG, ESCALA_IMG });
 					//sprite_personagem.setScale()
-					mover_teste(-MOV_SPEED, 0);
+					MOVX = -MOV_SPEED;
+					MOVY = 0;
 					
 					break;
 
@@ -91,9 +103,23 @@ void Principal::loop(sf::RenderWindow* janela)
 		janela->clear();
 		janela->draw(sprite_personagem);
 		janela->draw(testeonaris);
+
+		sf::Time deltaTime = deltaClock.restart();  // Restart returns the time since the last restart call
+		timeSinceLastUpdate += deltaTime;
+
+		while (timeSinceLastUpdate >= timePerFrame) //controle do framerate 
+		{
+			timeSinceLastUpdate -= timePerFrame;
+
+			mover_teste(timePerFrame);
+			//sprite_personagem.move(xi, yi);
+			
+		}
 		
-		posicao = sprite_personagem.getPosition();
+		posicao = sprite_personagem.getPosition();				
 		
+		
+		//mover_teste(MOVX, MOVY);
 
 		janela->display();
 
@@ -105,11 +131,11 @@ void Principal::loop(sf::RenderWindow* janela)
 
 }
 
-void Principal::mover_teste(int xi, int yi)
+void Principal::mover_teste(sf::Time frame)
 {
 	
-	sprite_personagem.move(xi, yi);
-	
+	sprite_personagem.move(MOVX*frame.asSeconds(), MOVY*frame.asSeconds());
+
 	
 	int i, j = MOV_SPEED;// / MOV_SPEED;
 	bool flag = false;
@@ -128,7 +154,7 @@ void Principal::mover_teste(int xi, int yi)
 		}
 		if (!flag)
 		{
-			sprite_personagem.move(-xi / j, -yi / j);
+			sprite_personagem.move(-MOVX / j, -MOVY / j);
 			
 		}
 		if(j>1)

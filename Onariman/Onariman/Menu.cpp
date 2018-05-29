@@ -89,7 +89,7 @@ void Menu::selection()
 
 	sf::Event event;
 	Principal jogo;
-	
+	//window.setFramerateLimit(60);
 	texMenu.loadTexture("fundo.png", 0, 0);
 	texMenu.loadTexture("oooooo2.png", 380, 553);
 	//texMenu.loadTexture("onaaaaa.png", 0, 0);

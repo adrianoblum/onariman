@@ -1,7 +1,6 @@
 ﻿  Principal.cpp
-c:\users\doubl\desktop\projeto onariman\onariman\onariman\principal.cpp(111): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\doubl\desktop\projeto onariman\onariman\onariman\principal.cpp(131): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\doubl\desktop\projeto onariman\onariman\onariman\principal.cpp(172): warning C4996: 'sf::Text::setColor': was declared deprecated
+c:\users\doubl\desktop\projeto onariman\onariman\onariman\principal.cpp(157): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\doubl\desktop\projeto onariman\onariman\onariman\principal.cpp(198): warning C4996: 'sf::Text::setColor': was declared deprecated
   c:\users\doubl\desktop\projeto onariman\external libraries\sfml\include\sfml\graphics\text.hpp(210): note: see declaration of 'sf::Text::setColor'
   Onariman.vcxproj -> C:\Users\doubl\Desktop\Projeto OnariMan\Onariman\Debug\Onariman.exe
   Onariman.vcxproj -> C:\Users\doubl\Desktop\Projeto OnariMan\Onariman\Debug\Onariman.pdb (Partial PDB)

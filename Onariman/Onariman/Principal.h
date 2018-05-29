@@ -3,7 +3,7 @@
 #include "Ponto.h"
 
 
-#define MOV_SPEED 20
+#define MOV_SPEED 300
 #define ESCALA_IMG 0.22f
 #define ESCALA_MAPA 1.5f
 
@@ -13,7 +13,7 @@ public:
 	Principal();
 	~Principal();
 	void loop(sf::RenderWindow* janela);
-	void mover_teste(int xi, int yi);
+	void mover_teste(sf::Time frame);
 	void carrega_xarater();
 	void carrega_texto_temp();
 private:
@@ -26,6 +26,9 @@ private:
 
 	sf::Sprite testeonaris;
 	sf::Texture testeonarit;
+
+	int MOVX;
+	int MOVY;
 
 };
 
