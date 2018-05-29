@@ -1,5 +1,6 @@
 #include "Menu.h"
 #include <iostream>
+#include "Principal.h"
 
 
 Menu::Menu(float width, float height)
@@ -87,7 +88,7 @@ void Menu::selection()
 	play_music();
 
 	sf::Event event;
-	
+	Principal jogo;
 	
 	texMenu.loadTexture("fundo.png", 0, 0);
 	texMenu.loadTexture("oooooo2.png", 380, 553);
@@ -117,6 +118,8 @@ void Menu::selection()
 					{
 					case 0:
 						std::cout << "Play button has been pressed" << std::endl;
+						music.stop();
+						jogo.loop(&window);
 						break;
 					case 1:
 						std::cout << "Option button has been pressed" << std::endl;
@@ -165,7 +168,9 @@ int Menu::play_music()
 	
 	if (!music.openFromFile("Smoke Weed Everyday.ogg"))
 		return -1; // error
+	music.setLoop(true);
 	music.play();
+	
 	return 0;
 }
 

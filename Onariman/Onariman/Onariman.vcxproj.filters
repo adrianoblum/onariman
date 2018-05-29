@@ -24,12 +24,30 @@
     <ClCompile Include="Texturas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Principal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ponto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Texturas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Principal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ponto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
