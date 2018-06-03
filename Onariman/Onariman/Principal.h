@@ -14,6 +14,7 @@ public:
 	~Principal();
 	void loop(sf::RenderWindow* janela);
 	void mover_teste(sf::Time frame);
+	bool testaBuffer();
 	void carrega_xarater();
 	void carrega_texto_temp();
 private:
@@ -27,6 +28,8 @@ private:
 	sf::Sprite testeonaris;
 	sf::Texture testeonarit;
 
+	int bufferMOVX;
+	int bufferMOVY;
 	int MOVX;
 	int MOVY;
 
