@@ -1,11 +1,6 @@
 ﻿  Principal.cpp
-c:\users\doubl\desktop\projeto onariman\onariman\onariman\principal.cpp(175): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\doubl\desktop\projeto onariman\onariman\onariman\principal.cpp(194): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\doubl\desktop\projeto onariman\onariman\onariman\principal.cpp(245): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\doubl\desktop\projeto onariman\onariman\onariman\principal.cpp(276): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\doubl\desktop\projeto onariman\onariman\onariman\principal.cpp(309): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\doubl\desktop\projeto onariman\onariman\onariman\principal.cpp(340): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\doubl\desktop\projeto onariman\onariman\onariman\principal.cpp(385): warning C4996: 'sf::Text::setColor': was declared deprecated
+c:\users\doubl\desktop\projeto onariman\onariman\onariman\principal.cpp(183): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\doubl\desktop\projeto onariman\onariman\onariman\principal.cpp(223): warning C4996: 'sf::Text::setColor': was declared deprecated
   c:\users\doubl\desktop\projeto onariman\external libraries\sfml\include\sfml\graphics\text.hpp(210): note: see declaration of 'sf::Text::setColor'
   Onariman.vcxproj -> C:\Users\doubl\Desktop\Projeto OnariMan\Onariman\Debug\Onariman.exe
   Onariman.vcxproj -> C:\Users\doubl\Desktop\Projeto OnariMan\Onariman\Debug\Onariman.pdb (Partial PDB)
