@@ -11,27 +11,32 @@ Principal::Principal()
 
 	Collision::CreateTextureAndBitmask(testeonarit, "mapa2.png");
 	testeonaris.setTexture(testeonarit);
-	testeonaris.setOrigin(testeonaris.getGlobalBounds().height / 2, testeonaris.getGlobalBounds().width / 2);
+	testeonaris.setOrigin(testeonaris.getGlobalBounds().width / 2, testeonaris.getGlobalBounds().height / 2);
 	testeonaris.setPosition(SWIDTH/2, SHEIGHT/2);
 	testeonaris.setScale(ESCALA_MAPA, ESCALA_MAPA);
 
 	Collision::CreateTextureAndBitmask(testemaskt, "mapa_mask.png");
 	testemask.setTexture(testemaskt);
-	testemask.setOrigin(testemask.getGlobalBounds().height / 2, testemask.getGlobalBounds().width / 2);
+
+	testemask.setOrigin(testemask.getGlobalBounds().width / 2, testemask.getGlobalBounds().height / 2);
 	testemask.setPosition(SWIDTH / 2, SHEIGHT / 2);
 	testemask.setScale(ESCALA_MAPA, ESCALA_MAPA);
 
 	Collision::CreateTextureAndBitmask(textura_personagem, "Original_PacMan.png");
+	
 	sprite_personagem.setTexture(textura_personagem);
-	sprite_personagem.setOrigin(sprite_personagem.getGlobalBounds().height/2, sprite_personagem.getGlobalBounds().width/2);
-	sprite_personagem.setPosition(testeonaris.getGlobalBounds().height / 2, testeonaris.getGlobalBounds().width / 2 + 50);
+
+	sprite_personagem.setOrigin(sprite_personagem.getGlobalBounds().width /2, sprite_personagem.getGlobalBounds().height/2);
+	sprite_personagem.setPosition(testeonaris.getGlobalBounds().width / 2, testeonaris.getGlobalBounds().height / 2+73);
 	sprite_personagem.setScale(ESCALA_IMG, ESCALA_IMG);
 	posicao = sprite_personagem.getPosition();
 
-	Collision::CreateTextureAndBitmask(testebocat, "TesteColisaoBarra.png");
+	Collision::CreateTextureAndBitmask(testebocat, "teste2.png");
+	
 	testeboca.setTexture(testebocat);
-	testeboca.setOrigin(testeboca.getGlobalBounds().height / 2, testeboca.getGlobalBounds().width / 2);
-	testeboca.setPosition(testeonaris.getGlobalBounds().height / 2, testeonaris.getGlobalBounds().width / 2 + 50);
+	
+	testeboca.setOrigin(testeboca.getGlobalBounds().height/2, testeboca.getGlobalBounds().width/2);
+	testeboca.setPosition(testeonaris.getGlobalBounds().width / 2, testeonaris.getGlobalBounds().height / 2+73);
 	testeboca.setScale(ESCALA_IMG, ESCALA_IMG);
 	//posicao = sprite_personagem.getPosition();
 	MOVX = 0;
@@ -128,7 +133,7 @@ void Principal::loop(sf::RenderWindow* janela)
 				rotacao(MOVX, MOVY);
 			}
 			testeboca.move(MOVX*timePerFrame.asSeconds(), MOVY*timePerFrame.asSeconds());
-			if (!Collision::PixelPerfectTest(testeboca, testeonaris))
+			if (!Collision::PixelPerfectTest(testeboca, testeonaris,50))
 			{
 				primeira = true;
 				sprite_personagem.move(MOVX*timePerFrame.asSeconds(), MOVY*timePerFrame.asSeconds());
@@ -161,7 +166,7 @@ void Principal::loop(sf::RenderWindow* janela)
 		janela->clear();
 		
 		janela->draw(testeonaris);
-		//janela->draw(testemask);
+		janela->draw(testemask);
 		janela->draw(sprite_personagem);
 		janela->draw(testeboca);
 		janela->display();
@@ -181,14 +186,14 @@ bool Principal::testaBuffer()
 	float movx=static_cast<float>(bufferMOVX)/60;
 	float movy=static_cast<float>(bufferMOVY)/60;
 	rotacao(movx, movy);
-	testeboca.move(movx, movy);
-	if (Collision::PixelPerfectTest(testeboca, testeonaris))
+	testeboca.move(movx*4, movy*4);
+	if (Collision::PixelPerfectTest(testeboca, testeonaris,50))
 	{
 		podeounao = false;
 
 	}
 	rotacao(MOVX, MOVY);
-	testeboca.move(-movx, -movy);
+	testeboca.move(-movx*4, -movy*4);
 	return podeounao;
 
 

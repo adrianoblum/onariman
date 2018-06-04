@@ -3,9 +3,11 @@
 #include "Ponto.h"
 
 
-#define MOV_SPEED 300
-#define ESCALA_IMG 0.22f
-#define ESCALA_MAPA 1.5f
+
+#define ESCALA_IMG 0.18f
+#define ESCALA_MAPA (ESCALA_IMG*6.818181f)
+#define MOV_SPEED (ESCALA_IMG*1363.636363f)
+#define FATOR (ESCALA_IMG*9.090909)
 
 class Principal
 {
@@ -18,7 +20,6 @@ public:
 	void carrega_xarater();
 	void carrega_texto_temp();
 	void rotacao(int, int);
-
 private:
 	Texturas temp;
 	sf::Sprite sprite_personagem;
