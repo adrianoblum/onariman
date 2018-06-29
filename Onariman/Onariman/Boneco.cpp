@@ -74,10 +74,15 @@ void Boneco::girar(int movx,int movy)
 
 void Boneco::set_skin(std::string s)
 {
+	
+
 	Collision::CreateTextureAndBitmask(Tboneco, s);
 
 	Sboneco.setTexture(Tboneco);
 
+	//Sboneco.setOrigin(Sboneco.getGlobalBounds().width / 2, Sboneco.getGlobalBounds().height / 2);
+	//Sboneco.setPosition(0, 0);
+	//Sboneco.setScale(ESCALA_IMG, ESCALA_IMG);
 }
 
 bool Boneco::colidiu(sf::Sprite objeto, int alpha)
