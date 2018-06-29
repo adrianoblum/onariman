@@ -140,53 +140,49 @@ void Principal::loop(sf::RenderWindow* janela)
 
 		sf::Time deltaTime = deltaClock.restart();  // Restart returns the time since the last restart call
 		timeSinceLastUpdate += deltaTime;
-
-		podeounao = testaBuffer();
-		if (podeounao)
-		{
-
-			MOVX = bufferMOVX;
-			MOVY = bufferMOVY;
-			//rotacao(MOVX, MOVY);
-			pacman.girar(MOVX / 10, MOVY / 10);
-			posPacman.girar(MOVX / 10, MOVY / 10);
-		}
-		posPacman.move(MOVX/10, MOVY/10, 1);
-		if (!posPacman.colidiu(SMapaBackground, 50))
-		{
-			primeira = true;
-			posPacman.move(-MOVX / 10, -MOVY / 10, 1);
-			while (timeSinceLastUpdate >= timePerFrame) //controle do framerate 
-			{
-
-				timeSinceLastUpdate -= timePerFrame;
-
-				pacman.move(MOVX, MOVY, timePerFrame.asSeconds());
-				posPacman.move(MOVX, MOVY, timePerFrame.asSeconds());
-			}
-			
-			//posPacman.move(-MOVX, -MOVY, timePerFrame.asSeconds());
-			//sprite_personagem.move(MOVX*timePerFrame.asSeconds(), MOVY*timePerFrame.asSeconds());
-
-		}
-		else
-		{
-			/*if (primeira)
-			{
-				posPacman.move(MOVX / 30, MOVY / 30, 1);
-				pacman.move(MOVX / 30 * 2, MOVY / 30 * 2, 1);
-				primeira = false;
-			}
-			else*/
-			
-				posPacman.move(-MOVX / 10, -MOVY / 10, 1);
-
-			
-
-
-		}
-
 		
+		while (timeSinceLastUpdate >= timePerFrame) //controle do framerate 
+		{
+			
+			timeSinceLastUpdate -= timePerFrame;
+			podeounao = testaBuffer();
+			if (podeounao)
+			{
+
+				MOVX = bufferMOVX;
+				MOVY = bufferMOVY;
+				//rotacao(MOVX, MOVY);
+				pacman.girar(MOVX, MOVY);
+				posPacman.girar(MOVX, MOVY);
+			}
+			posPacman.move(MOVX, MOVY,timePerFrame.asSeconds());
+			if (!posPacman.colidiu(SMapaBackground, 50))
+			{
+				primeira = true;
+				pacman.move(MOVX, MOVY, timePerFrame.asSeconds());
+				//posPacman.move(-MOVX, -MOVY, timePerFrame.asSeconds());
+				//sprite_personagem.move(MOVX*timePerFrame.asSeconds(), MOVY*timePerFrame.asSeconds());
+				
+			}
+			else
+			{
+				if (primeira)
+				{
+					posPacman.move(MOVX, MOVY, timePerFrame.asSeconds());
+					pacman.move(MOVX*2, MOVY*2, timePerFrame.asSeconds());
+					primeira = false;
+				}
+				else
+				{
+					posPacman.move(-MOVX, -MOVY, timePerFrame.asSeconds());
+
+				}
+				
+				
+			}
+			
+			
+		}
 		
 		//posicao = sprite_personagem.getPosition();				
 		
@@ -209,7 +205,7 @@ void Principal::loop(sf::RenderWindow* janela)
 			pacman.draw(janela);
 			posPacman.draw(janela);
 
-			//janela->draw(Fantasma);			
+			janela->draw(Fantasma);			
 			janela->display();
 		
 		if (Action)
@@ -244,6 +240,9 @@ bool Principal::testaBuffer()
 	posPacman.move(-movx*4, -movy*4, 1);
 
 	return podeounao;
+
+
+
 }
 
 
