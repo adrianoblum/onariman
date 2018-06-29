@@ -8,6 +8,7 @@
 class Menu
 {
 public:
+	Menu() {};
 	Menu(float width, float height);
 	~Menu();
 	
@@ -16,10 +17,10 @@ public:
 	void MoveDown();
 	int GetPressedItem() { return selectedItemIndex; }
 	
-private:
+protected:
 	int selectedItemIndex;
 	sf::Font font;
-	sf::Text menu[MAX_NUMBER_OF_ITEMS];
+	sf::Text options[MAX_NUMBER_OF_ITEMS];
 	sf::Music music;
 	sf::Sprite fundo;
 	sf::Texture texturafundo;
@@ -30,7 +31,7 @@ public:
 	void selection();
 	int play_music();
 	
-private:
+protected:
 	std::string skin;
 public:
 	int loadFundo();

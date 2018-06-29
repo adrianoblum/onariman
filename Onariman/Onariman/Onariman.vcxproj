@@ -145,16 +145,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Boneco.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="PacMan.cpp" />
+    <ClCompile Include="Pause.cpp" />
     <ClCompile Include="Ponto.cpp" />
     <ClCompile Include="Principal.cpp" />
     <ClCompile Include="Texturas.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Boneco.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="PacMan.h" />
+    <ClInclude Include="Pause.h" />
     <ClInclude Include="Ponto.h" />
     <ClInclude Include="Principal.h" />
     <ClInclude Include="Texturas.h" />

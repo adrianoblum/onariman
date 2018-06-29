@@ -1,50 +1,35 @@
 #include "Principal.h"
 #include <iostream>
 #include "Menu.h"
+#include "Pause.h"
 #include "Collision.h"
 
 
-Principal::Principal()
+Principal::Principal() : pauseMenu(SWIDTH, SHEIGHT)
 {
-	//carrega_xarater();
 	
+	Collision::CreateTextureAndBitmask(TMapaBackground, "Recursos/Imagens/mapa2.png");
+	SMapaBackground.setTexture(TMapaBackground);
+	SMapaBackground.setOrigin(SMapaBackground.getGlobalBounds().width / 2, SMapaBackground.getGlobalBounds().height / 2);
+	SMapaBackground.setPosition(SWIDTH/2, SHEIGHT/2);
+	SMapaBackground.setScale(ESCALA_MAPA, ESCALA_MAPA);
+	posPacman.set_skin("Recursos/Imagens/teste2.png");
 
-	Collision::CreateTextureAndBitmask(testeonarit, "mapa2.png");
-	testeonaris.setTexture(testeonarit);
-	testeonaris.setOrigin(testeonaris.getGlobalBounds().width / 2, testeonaris.getGlobalBounds().height / 2);
-	testeonaris.setPosition(SWIDTH/2, SHEIGHT/2);
-	testeonaris.setScale(ESCALA_MAPA, ESCALA_MAPA);
-
-	Collision::CreateTextureAndBitmask(testemaskt, "mapa_mask.png");
+	Collision::CreateTextureAndBitmask(testemaskt, "Recursos/Imagens/mapa_mask.png");
 	testemask.setTexture(testemaskt);
 
 	testemask.setOrigin(testemask.getGlobalBounds().width / 2, testemask.getGlobalBounds().height / 2);
 	testemask.setPosition(SWIDTH / 2, SHEIGHT / 2);
 	testemask.setScale(ESCALA_MAPA, ESCALA_MAPA);
 
-	Collision::CreateTextureAndBitmask(textura_personagem, "Original_PacMan.png");
-	
-	sprite_personagem.setTexture(textura_personagem);
-
-	sprite_personagem.setOrigin(sprite_personagem.getGlobalBounds().width /2, sprite_personagem.getGlobalBounds().height/2);
-	sprite_personagem.setPosition(testeonaris.getGlobalBounds().width / 2, testeonaris.getGlobalBounds().height / 2+73);
-	sprite_personagem.setScale(ESCALA_IMG, ESCALA_IMG);
-	posicao = sprite_personagem.getPosition();
-
-	Collision::CreateTextureAndBitmask(testebocat, "teste2.png");
-	
-	testeboca.setTexture(testebocat);
-	
-	testeboca.setOrigin(testeboca.getGlobalBounds().height/2, testeboca.getGlobalBounds().width/2);
-	testeboca.setPosition(testeonaris.getGlobalBounds().width / 2, testeonaris.getGlobalBounds().height / 2+73);
-	testeboca.setScale(ESCALA_IMG, ESCALA_IMG);
-	//posicao = sprite_personagem.getPosition();
 	MOVX = 0;
 	MOVY = 0;
 	bufferMOVX = 0;
 	bufferMOVY = 0;
-
-
+	parouMOVY = 0;
+	parouMOVX = 0;
+	Action = false;
+	menuFechou = false;
 }
 
 
@@ -57,6 +42,7 @@ void Principal::loop(sf::RenderWindow* janela)
 	sf::Event event;
 	bool podeounao = true;
 	bool primeira = true;
+	bool OpenMenu = false;
 	sf::Time timePerFrame = sf::seconds(1.0f / 60.0f);
 	sf::Clock deltaClock;  
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
@@ -64,6 +50,7 @@ void Principal::loop(sf::RenderWindow* janela)
 	carrega_texto_temp();
 	while (janela->isOpen())
 	{
+	
 		while (janela->pollEvent(event))
 		{
 			switch (event.type)
@@ -74,36 +61,70 @@ void Principal::loop(sf::RenderWindow* janela)
 				{
 				case sf::Keyboard::Up:
 					
-					
-					bufferMOVY = -MOV_SPEED;
-					bufferMOVX = 0;
-					//mover_teste(0, -MOV_SPEED);
+					if (OpenMenu == false)
+					{
+						bufferMOVY = -MOV_SPEED;
+						bufferMOVX = 0;
+						//mover_teste(0, -MOV_SPEED);
+					}
 					break;
 
 				case sf::Keyboard::Down:
 					
-					
-					bufferMOVY = MOV_SPEED;
-					bufferMOVX = 0;
+					if (OpenMenu == false)
+					{
+						bufferMOVY = MOV_SPEED;
+						bufferMOVX = 0;
+					}
 					break;
 
 				case sf::Keyboard::Right:
 					
-					
-					bufferMOVX = MOV_SPEED;
-					bufferMOVY = 0;
+					if (OpenMenu == false)
+					{
+						bufferMOVX = MOV_SPEED;
+						bufferMOVY = 0;
+					}
 					break;
 				case sf::Keyboard::Left:
 
 					
-
-					bufferMOVX = -MOV_SPEED;
-					bufferMOVY = 0;
+					if (OpenMenu == false)
+					{
+						bufferMOVX = -MOV_SPEED;
+						bufferMOVY = 0;
+					}
 					
 					break;
 
 				case sf::Keyboard::Return:
+					if (OpenMenu == false)
+					{
 
+					}
+					else
+					{
+						janela->close();
+					}
+					break;
+				case sf::Keyboard::Escape:
+					if (OpenMenu == false)
+					{
+
+						//colocar funçao de stand-by p/ todos os entity
+						parouMOVX = MOVX;
+						parouMOVY = MOVY;
+						bufferMOVX = 0;
+						bufferMOVY = 0;
+						MOVX = 0;
+						MOVY = 0;
+						OpenMenu = true;
+						
+					}
+					else
+					{
+						
+					}
 					break;
 				}
 
@@ -130,48 +151,67 @@ void Principal::loop(sf::RenderWindow* janela)
 
 				MOVX = bufferMOVX;
 				MOVY = bufferMOVY;
-				rotacao(MOVX, MOVY);
+				//rotacao(MOVX, MOVY);
+				pacman.girar(MOVX, MOVY);
+				posPacman.girar(MOVX, MOVY);
 			}
-			testeboca.move(MOVX*timePerFrame.asSeconds(), MOVY*timePerFrame.asSeconds());
-			if (!Collision::PixelPerfectTest(testeboca, testeonaris,50))
+			posPacman.move(MOVX*2, MOVY*2,timePerFrame.asSeconds());
+			if (!posPacman.colidiu(SMapaBackground, 50))
 			{
 				primeira = true;
-				sprite_personagem.move(MOVX*timePerFrame.asSeconds(), MOVY*timePerFrame.asSeconds());
+				pacman.move(MOVX, MOVY, timePerFrame.asSeconds());
+				posPacman.move(-MOVX, -MOVY, timePerFrame.asSeconds());
+				//sprite_personagem.move(MOVX*timePerFrame.asSeconds(), MOVY*timePerFrame.asSeconds());
 				
 			}
 			else
 			{
-				if (primeira)
-				{
-					testeboca.move(MOVX*timePerFrame.asSeconds(), MOVY*timePerFrame.asSeconds());
-					sprite_personagem.move(MOVX*timePerFrame.asSeconds()*2, MOVY*timePerFrame.asSeconds()*2);
-					primeira = false;
-				}
-				else
-				{
-					testeboca.move(-MOVX*timePerFrame.asSeconds(), -MOVY*timePerFrame.asSeconds());
+				//if (primeira)
+				//{
+				//	posPacman.move(MOVX, MOVY, timePerFrame.asSeconds());
+				//	pacman.move(MOVX*2, MOVY*2, timePerFrame.asSeconds());
+				//	primeira = false;
+				//}
+				//else
+				//{
+					posPacman.move(-MOVX*2, -MOVY*2, timePerFrame.asSeconds());
 
-				}
+				//}
 				
-				//for(i=0;i>)
+				
 			}
 			
 			
 		}
 		
-		posicao = sprite_personagem.getPosition();				
+		//posicao = sprite_personagem.getPosition();				
 		
 		
 		//mover_teste(MOVX, MOVY);
 		janela->clear();
+		while (OpenMenu == true)
+		{
+			
+			OpenMenu = false;
+			//Action = selection(janela);
+			menuFechou = true;
+			
 		
-		janela->draw(testeonaris);
-		janela->draw(testemask);
-		janela->draw(sprite_personagem);
-		janela->draw(testeboca);
-		janela->display();
+		}
+		
+			janela->draw(SMapaBackground);
+			//janela->draw(testemask);
+			janela->draw(testemask);
+			pacman.draw(janela);
+			posPacman.draw(janela);
 
-
+			janela->draw(Fantasma);			
+			janela->display();
+		
+		if (Action)
+			janela->close();
+		
+			
 
 	}
 
@@ -185,33 +225,26 @@ bool Principal::testaBuffer()
 	bool podeounao = true;
 	float movx=static_cast<float>(bufferMOVX)/60;
 	float movy=static_cast<float>(bufferMOVY)/60;
-	rotacao(movx, movy);
-	testeboca.move(movx*4, movy*4);
-	if (Collision::PixelPerfectTest(testeboca, testeonaris,50))
+	pacman.girar(movx, movy);
+	posPacman.girar(movx, movy);
+	//rotacao(movx, movy);
+	posPacman.move(movx*4, movy*4,1);
+	//testeboca.move(movx*4, movy*4);
+	if (posPacman.colidiu(SMapaBackground,50))
 	{
 		podeounao = false;
 
-	}
-	rotacao(MOVX, MOVY);
-	testeboca.move(-movx*4, -movy*4);
+	}	
+	pacman.girar(MOVX, MOVY);
+	posPacman.girar(MOVX, MOVY);
+	posPacman.move(-movx*4, -movy*4, 1);
+
 	return podeounao;
 
 
 
 }
 
-void Principal::carrega_xarater()
-{
-	
-	if(!textura_personagem.loadFromFile("Original_PacMan.png"))
-	{
-		std::cout << "chabugao no char";
-		return;
-	}
-	sprite_personagem.setTexture(textura_personagem);
-
-
-}
 
 
 void Principal::carrega_texto_temp()
@@ -234,56 +267,5 @@ void Principal::carrega_texto_temp()
 		textRect.top + textRect.height / 2.0f);
 	menu[0].setPosition(sf::Vector2f(SWIDTH / 2.0f, SWIDTH / (MAX_NUMBER_OF_ITEMS + 1) * 1));
 
-
-}
-
-void Principal::rotacao(int movx, int movy)
-{
-	if(movy<0)
-	{
-		sprite_personagem.setRotation(270);
-		sprite_personagem.setScale({ -ESCALA_IMG, ESCALA_IMG });
-		testeboca.setRotation(270);
-		testeboca.setScale({ -ESCALA_IMG, ESCALA_IMG });
-
-	}
-	else if(movy>0)
-	{
-		
-		sprite_personagem.setRotation(90);
-		sprite_personagem.setScale({ -ESCALA_IMG, ESCALA_IMG });
-		testeboca.setRotation(90);
-		testeboca.setScale({ -ESCALA_IMG, ESCALA_IMG });
-
-	}
-	else if(movx>0)
-	{
-		sprite_personagem.setRotation(0);
-		sprite_personagem.setScale({ -ESCALA_IMG, ESCALA_IMG });
-		testeboca.setRotation(0);
-		testeboca.setScale({ -ESCALA_IMG, ESCALA_IMG });
-
-	}
-
-	else if(movx<0)
-	{
-		sprite_personagem.setRotation(0);
-
-		sprite_personagem.setScale({ ESCALA_IMG, ESCALA_IMG });
-		testeboca.setRotation(0);
-
-		testeboca.setScale({ ESCALA_IMG, ESCALA_IMG });
-
-
-	}
-	else
-	{
-		sprite_personagem.setRotation(0);
-		sprite_personagem.setScale({ -ESCALA_IMG, ESCALA_IMG });
-		testeboca.setRotation(0);
-		testeboca.setScale({ -ESCALA_IMG, ESCALA_IMG });
-
-	}
-	
 
 }
