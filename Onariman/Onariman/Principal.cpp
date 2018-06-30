@@ -54,7 +54,17 @@ void Principal::loop(sf::RenderWindow* janela)
 	carrega_texto_temp();
 	while (janela->isOpen())
 	{
-	
+		while (OpenMenu == true)
+		{
+
+			OpenMenu = false;
+			pauseMenu.selection(janela);
+			//Action = selection(janela);
+			menuFechou = true;
+
+
+		}
+		
 		while (janela->pollEvent(event))
 		{
 			switch (event.type)
@@ -157,17 +167,18 @@ void Principal::loop(sf::RenderWindow* janela)
 		
 		//mover_teste(MOVX, MOVY);
 		
+		
 		while (OpenMenu == true)
 		{
-			
+
 			OpenMenu = false;
+			menuFechou = false;
+			pauseMenu.selection(janela);
 			//Action = selection(janela);
 			menuFechou = true;
+			std::cout << "meio q cagou" << std::endl;
 			
-		
 		}
-
-		
 		
 		refresh_screen(janela);
 		if (Action)
@@ -214,9 +225,8 @@ void Principal::refresh_screen(sf::RenderWindow* janela)
 	janela->clear();
 	janela->draw(SMapaBackground);
 	//janela->draw(testemask);
-	janela->draw(testemask);
-	pacman.draw(janela);
-	posPacman.draw(janela);
+	//janela->draw(testemask);
+	pacman.draw(janela);	
 	janela->display();
 
 }

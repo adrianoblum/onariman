@@ -38,8 +38,8 @@ void Boneco::girar(int movx,int movy)
 	}
 	else
 	{
-		Sboneco.setRotation(0);
-		Sboneco.setScale({ -ESCALA_IMG, ESCALA_IMG });
+		//Sboneco.setRotation(0);
+		//Sboneco.setScale({ -ESCALA_IMG, ESCALA_IMG });
 		
 
 	}

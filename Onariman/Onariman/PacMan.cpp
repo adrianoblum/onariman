@@ -1,6 +1,7 @@
 ﻿#include "PacMan.h"
 #include "Principal.h"
 #include "Posicionador.h"
+#include <iostream>
 
 PacMan::PacMan()
 {
@@ -60,7 +61,7 @@ bool PacMan::testaBuffer(Principal* main)
 
 void PacMan::analisaMovimento(Principal* main)
 {
-
+	
 	bool podeounao;
 	podeounao = testaBuffer(main);
 	if (podeounao)

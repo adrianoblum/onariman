@@ -3,8 +3,8 @@
 #include <SFML/Audio.hpp>
 #include "Texturas.h"
 #define MAX_NUMBER_OF_ITEMS 3
-#define SWIDTH 1680
-#define SHEIGHT 1050
+#define SWIDTH 1366
+#define SHEIGHT 768
 class Menu
 {
 public:

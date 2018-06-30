@@ -6,8 +6,8 @@
 #include "Posicionador.h"
 #include "PacMan.h"
 
-#define SWIDTH 1680
-#define SHEIGHT 1050
+#define SWIDTH 1366
+#define SHEIGHT 768
 #define MAX_NUMBER_OF_ITEMS 3
 #define ESCALA_IMG 0.18f
 #define ESCALA_MAPA (ESCALA_IMG*6.818181f)
