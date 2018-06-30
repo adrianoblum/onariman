@@ -3,6 +3,7 @@
 #include "Ponto.h"
 #include "Pause.h"
 #include "PacMan.h"
+#include "Posicionador.h"
 
 #define SWIDTH 1680
 #define SHEIGHT 1050
@@ -21,6 +22,7 @@ public:
 	void mover_teste(sf::Time frame);
 	bool testaBuffer();
 	void carrega_texto_temp();
+	void refresh_screen(sf::RenderWindow* janela);
 	bool selection(sf::RenderWindow* janela);
 	void draw(sf::RenderWindow* janela);
 	void MoveUp();
@@ -58,7 +60,7 @@ private:
 	//
 	Pause pauseMenu;
 	PacMan pacman;
-	PacMan posPacman;
+	Posicionador posPacman;
 	int bufferMOVX;
 	int bufferMOVY;
 	int MOVX;

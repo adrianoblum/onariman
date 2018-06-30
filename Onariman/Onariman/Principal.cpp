@@ -13,7 +13,7 @@ Principal::Principal() : pauseMenu(SWIDTH, SHEIGHT)
 	SMapaBackground.setOrigin(SMapaBackground.getGlobalBounds().width / 2, SMapaBackground.getGlobalBounds().height / 2);
 	SMapaBackground.setPosition(SWIDTH/2, SHEIGHT/2);
 	SMapaBackground.setScale(ESCALA_MAPA, ESCALA_MAPA);
-	posPacman.set_skin("Recursos/Imagens/teste2.png");
+	//posPacman.set_skin("Recursos/Imagens/teste2.png");
 
 	Collision::CreateTextureAndBitmask(testemaskt, "Recursos/Imagens/mapa_mask.png");
 	testemask.setTexture(testemaskt);
@@ -43,6 +43,7 @@ void Principal::loop(sf::RenderWindow* janela)
 	bool podeounao = true;
 	bool primeira = true;
 	bool OpenMenu = false;
+	bool debug_var = false;
 	sf::Time timePerFrame = sf::seconds(1.0f / 60.0f);
 	sf::Clock deltaClock;  
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
@@ -143,7 +144,7 @@ void Principal::loop(sf::RenderWindow* janela)
 		
 		while (timeSinceLastUpdate >= timePerFrame) //controle do framerate 
 		{
-			
+
 			timeSinceLastUpdate -= timePerFrame;
 			podeounao = testaBuffer();
 			if (podeounao)
@@ -154,41 +155,47 @@ void Principal::loop(sf::RenderWindow* janela)
 				//rotacao(MOVX, MOVY);
 				pacman.girar(MOVX, MOVY);
 				posPacman.girar(MOVX, MOVY);
-			}
-			posPacman.move(MOVX, MOVY,timePerFrame.asSeconds());
-			if (!posPacman.colidiu(SMapaBackground, 50))
-			{
-				primeira = true;
-				pacman.move(MOVX, MOVY, timePerFrame.asSeconds());
-				//posPacman.move(-MOVX, -MOVY, timePerFrame.asSeconds());
-				//sprite_personagem.move(MOVX*timePerFrame.asSeconds(), MOVY*timePerFrame.asSeconds());
 				
 			}
-			else
-			{
-				if (primeira)
+			
+				posPacman.move(MOVX, MOVY, timePerFrame.asSeconds());
+				if (debug_var == true)
 				{
-					posPacman.move(MOVX, MOVY, timePerFrame.asSeconds());
-					pacman.move(MOVX*2, MOVY*2, timePerFrame.asSeconds());
-					primeira = false;
+					pacman.move(MOVX, MOVY, timePerFrame.asSeconds());
+					refresh_screen(janela);
 				}
 				else
 				{
-					posPacman.move(-MOVX, -MOVY, timePerFrame.asSeconds());
-
+					if (!Collision::PixelPerfectTest(posPacman.Sboneco, SMapaBackground, 50))
+					{
+						primeira = true;
+						pacman.move(MOVX, MOVY, timePerFrame.asSeconds());
+						
+					}
+					else
+					{
+						
+						if (primeira)
+						{
+							posPacman.move(MOVX, MOVY, timePerFrame.asSeconds());
+							pacman.move(MOVX * 2, MOVY * 2, timePerFrame.asSeconds());
+							primeira = false;
+						}
+						else
+						{
+							
+							posPacman.move(-MOVX, -MOVY, timePerFrame.asSeconds());
+						}
+					}
 				}
-				
-				
 			}
-			
-			
-		}
+		//}
 		
 		//posicao = sprite_personagem.getPosition();				
 		
 		
 		//mover_teste(MOVX, MOVY);
-		janela->clear();
+		
 		while (OpenMenu == true)
 		{
 			
@@ -198,16 +205,10 @@ void Principal::loop(sf::RenderWindow* janela)
 			
 		
 		}
-		
-			janela->draw(SMapaBackground);
-			//janela->draw(testemask);
-			janela->draw(testemask);
-			pacman.draw(janela);
-			posPacman.draw(janela);
 
-			janela->draw(Fantasma);			
-			janela->display();
 		
+		
+		refresh_screen(janela);
 		if (Action)
 			janela->close();
 		
@@ -229,6 +230,7 @@ bool Principal::testaBuffer()
 	posPacman.girar(movx, movy);
 	//rotacao(movx, movy);
 	posPacman.move(movx*4, movy*4,1);
+
 	//testeboca.move(movx*4, movy*4);
 	if (posPacman.colidiu(SMapaBackground,50))
 	{
@@ -267,5 +269,17 @@ void Principal::carrega_texto_temp()
 		textRect.top + textRect.height / 2.0f);
 	menu[0].setPosition(sf::Vector2f(SWIDTH / 2.0f, SWIDTH / (MAX_NUMBER_OF_ITEMS + 1) * 1));
 
+
+}
+
+void Principal::refresh_screen(sf::RenderWindow* janela)
+{
+	janela->clear();
+	janela->draw(SMapaBackground);
+	//janela->draw(testemask);
+	janela->draw(testemask);
+	pacman.draw(janela);
+	posPacman.draw(janela);
+	janela->display();
 
 }

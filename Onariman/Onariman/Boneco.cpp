@@ -9,8 +9,7 @@ void Boneco::girar(int movx,int movy)
 	{
 		Sboneco.setRotation(270);
 		Sboneco.setScale({ -ESCALA_IMG, ESCALA_IMG });
-		Sposicionador.setRotation(270);
-		Sposicionador.setScale({ -ESCALA_IMG, ESCALA_IMG });
+		
 
 	}
 	else if (movy>0)
@@ -18,16 +17,14 @@ void Boneco::girar(int movx,int movy)
 
 		Sboneco.setRotation(90);
 		Sboneco.setScale({ -ESCALA_IMG, ESCALA_IMG });
-		Sposicionador.setRotation(90);
-		Sposicionador.setScale({ -ESCALA_IMG, ESCALA_IMG });
+		
 
 	}
 	else if (movx>0)
 	{
 		Sboneco.setRotation(0);
 		Sboneco.setScale({ -ESCALA_IMG, ESCALA_IMG });
-		Sposicionador.setRotation(0);
-		Sposicionador.setScale({ -ESCALA_IMG, ESCALA_IMG });
+		
 
 	}
 
@@ -35,8 +32,7 @@ void Boneco::girar(int movx,int movy)
 	{
 		Sboneco.setRotation(0);
 		Sboneco.setScale({ ESCALA_IMG, ESCALA_IMG });
-		Sposicionador.setRotation(0);
-		Sposicionador.setScale({ ESCALA_IMG, ESCALA_IMG });
+		
 
 
 	}
@@ -44,8 +40,7 @@ void Boneco::girar(int movx,int movy)
 	{
 		Sboneco.setRotation(0);
 		Sboneco.setScale({ -ESCALA_IMG, ESCALA_IMG });
-		Sposicionador.setRotation(0);
-		Sposicionador.setScale({ -ESCALA_IMG, ESCALA_IMG });
+		
 
 	}
 		
@@ -90,4 +85,11 @@ bool Boneco::colidiu(sf::Sprite objeto, int alpha)
 void Boneco::draw(sf::RenderWindow* janela)
 {
 	janela->draw(Sboneco);
+}
+
+void Boneco::move(float MOVX, float MOVY, float time)
+{
+
+	Sboneco.move(MOVX*time, MOVY*time);
+
 }

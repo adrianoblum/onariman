@@ -14,8 +14,7 @@ public:
 	float speed;
 	sf::Sprite Sboneco;
 	sf::Texture Tboneco;
-	sf::Sprite Sposicionador;
-	sf::Texture Tposicionador;
+	
 
 
 public:
@@ -25,8 +24,6 @@ public:
 
 	sf::Sprite getSpriteBoneco(void){return Sboneco;}
 	sf::Texture getTextureBoneco(void) { return Tboneco; }
-	sf::Sprite getSpritePosicionador(void) { return Sposicionador; }
-	sf::Texture getTexturePosicionador(void) { return Tposicionador; }
 	//void loadTextureBoneco(std::string s);
 	void setSpriteBoneco(sf::Texture textura);
 	void loadTexturePosicionador(std::string s);
@@ -35,4 +32,5 @@ public:
 	void set_skin(std::string s);
 	bool colidiu(sf::Sprite objeto, int alpha);
 	void draw(sf::RenderWindow* janela);
+	void move(float MOVX, float MOVY, float time);
 };
