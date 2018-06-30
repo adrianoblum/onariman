@@ -45,6 +45,12 @@
     <ClCompile Include="Posicionador.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Animacao.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundFX.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texturas.h">
@@ -74,5 +80,14 @@
     <ClInclude Include="Posicionador.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Animacao.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundFX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

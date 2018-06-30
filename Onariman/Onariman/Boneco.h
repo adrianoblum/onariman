@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include "Animacao.h"
 
 
 namespace sf {
@@ -14,7 +15,7 @@ public:
 	float speed;
 	sf::Sprite Sboneco;
 	sf::Texture Tboneco;
-	
+	Animacao animacao;
 
 
 public:
@@ -25,13 +26,10 @@ public:
 	sf::Sprite getSpriteBoneco(void){return Sboneco;}
 	sf::Texture getTextureBoneco(void) { return Tboneco; }
 	//void loadTextureBoneco(std::string s);
-	void setSpriteBoneco(sf::Texture textura);
-	void loadTexturePosicionador(std::string s);
-	void setSpritePosicionador(std::string s);
-	void initialize();
 	void set_skin(std::string s);
 	bool colidiu(sf::Sprite objeto, int alpha);
 	void draw(sf::RenderWindow* janela);
 	void move(float MOVX, float MOVY, float time);
+	void update_animation(int row, float time);
 	bool testaBuffer(float bufferMOVX, float bufferMOVY, sf::Sprite SMapaBackground);
 };

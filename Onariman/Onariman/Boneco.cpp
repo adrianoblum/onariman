@@ -94,4 +94,9 @@ void Boneco::move(float MOVX, float MOVY, float time)
 
 }
 
+void Boneco::update_animation(int i, float time)
+{
 
+	animacao.update(i, time);
+	Sboneco.setTextureRect(animacao.uvRect);
+}

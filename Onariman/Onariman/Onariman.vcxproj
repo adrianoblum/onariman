@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animacao.cpp" />
     <ClCompile Include="Boneco.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="main.cpp" />
@@ -154,9 +155,11 @@
     <ClCompile Include="Ponto.cpp" />
     <ClCompile Include="Posicionador.cpp" />
     <ClCompile Include="Principal.cpp" />
+    <ClCompile Include="SoundFX.cpp" />
     <ClCompile Include="Texturas.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animacao.h" />
     <ClInclude Include="Boneco.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Menu.h" />
@@ -165,7 +168,11 @@
     <ClInclude Include="Ponto.h" />
     <ClInclude Include="Posicionador.h" />
     <ClInclude Include="Principal.h" />
+    <ClInclude Include="SoundFX.h" />
     <ClInclude Include="Texturas.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

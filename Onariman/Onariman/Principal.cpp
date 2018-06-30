@@ -48,10 +48,13 @@ void Principal::loop(sf::RenderWindow* janela)
 	bool primeira = true;
 	bool OpenMenu = false;
 	bool debug_var = false;
-	sf::Clock deltaClock;  
-	sf::Time timeSinceLastUpdate = sf::Time::Zero;
+	sf::Clock deltaClock;
 
+	sf::Clock second;
+	sf::Time timeSinceLastUpdate = sf::Time::Zero;
+	second.restart();
 	carrega_texto_temp();
+	soundfx.play(DEFAULT);
 	while (janela->isOpen())
 	{
 		while (OpenMenu == true)
@@ -124,7 +127,7 @@ void Principal::loop(sf::RenderWindow* janela)
 				case sf::Keyboard::Escape:
 					if (OpenMenu == false)
 					{
-
+						soundfx.stop(DEFAULT);
 						//colocar funçao de stand-by p/ todos os entity
 						parouMOVX = MOVX;
 						parouMOVY = MOVY;
@@ -149,8 +152,13 @@ void Principal::loop(sf::RenderWindow* janela)
 				break;
 			}
 		}
-
-		
+		//float teste = second.getElapsedTime().asSeconds();
+		if(second.getElapsedTime().asSeconds()>=.1f)
+		{
+			second.restart();
+			soundfx.play(COMENDO);
+		}
+		//sf::Time oneSecond = second.restart();
 
 		sf::Time deltaTime = deltaClock.restart();  // Restart returns the time since the last restart call
 		timeSinceLastUpdate += deltaTime;
@@ -162,6 +170,11 @@ void Principal::loop(sf::RenderWindow* janela)
 			pacman.analisaMovimento(this);
 		}
 		
+		
+		pacman.update_animation(0, deltaTime.asSeconds());
+		
+
+
 		//posicao = sprite_personagem.getPosition();				
 		
 		
@@ -177,7 +190,7 @@ void Principal::loop(sf::RenderWindow* janela)
 			//Action = selection(janela);
 			menuFechou = true;
 			std::cout << "meio q cagou" << std::endl;
-			
+			soundfx.play(DEFAULT);
 		}
 		
 		refresh_screen(janela);
@@ -235,3 +248,5 @@ PacMan* Principal::getPacMan()
 {
 	return &pacman;
 }
+
+

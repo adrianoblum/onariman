@@ -5,11 +5,17 @@
 
 PacMan::PacMan()
 {
-
-	Collision::CreateTextureAndBitmask(Tboneco, "Recursos/Imagens/Original_PacMan.png");
-
+	
+	//Collision::CreateTextureAndBitmask(Tboneco, "Recursos/Imagens/pacmanSheet.png");
+	Tboneco.loadFromFile("Recursos/Imagens/pacmanSheet.png");
+	Animacao temp(&Tboneco,sf::Vector2u(3,1),0.1f);
+	animacao = temp;
+	//sf::Sprite teste(Tboneco, animacao.uvRect);
+	
+	//Sboneco.setTextureRect(sf::IntRect(20,0,180,180));
 	Sboneco.setTexture(Tboneco);
-
+	//Sboneco.setTextureRect(animacao.uvRect);
+	Sboneco.setTextureRect(sf::IntRect(180, 0, 180, 180));
 	Sboneco.setOrigin(Sboneco.getGlobalBounds().width / 2, Sboneco.getGlobalBounds().height / 2);
 	Sboneco.setPosition(50, 50);
 	Sboneco.setScale(ESCALA_IMG, ESCALA_IMG);
@@ -82,6 +88,7 @@ void PacMan::analisaMovimento(Principal* main)
 		{
 			primeira_colisao = true;
 			main->getPacMan()->move(*main->getMOVX(), *main->getMOVY(), main->getFrameTime());
+			
 			//posPacman.move(-MOVX, -MOVY, timePerFrame.asSeconds());
 			//sprite_personagem.move(MOVX*timePerFrame.asSeconds(), MOVY*timePerFrame.asSeconds());
 		}
@@ -103,3 +110,5 @@ void PacMan::analisaMovimento(Principal* main)
 
 	
 }
+
+

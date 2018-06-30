@@ -4,6 +4,7 @@
 #include "Posicionador.h"
 
 
+
 class Principal;
 
 class PacMan:public Boneco
@@ -12,6 +13,8 @@ private:
 
 	Posicionador posPacman;
 	bool primeira_colisao;
+	
+
 
 public:
 
@@ -22,4 +25,8 @@ public:
 	void analisaMovimento(Principal* main);
 
 	void initialize(std::string s);
+	Animacao* getAnimation() { return &animacao; }
+
+
+
 };

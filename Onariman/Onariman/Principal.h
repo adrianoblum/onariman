@@ -5,6 +5,8 @@
 
 #include "Posicionador.h"
 #include "PacMan.h"
+#include "SoundFX.h"
+
 
 #define SWIDTH 1366
 #define SHEIGHT 768
@@ -20,6 +22,7 @@
 class Principal
 {
 public:
+	
 	Principal();
 	~Principal();
 	void loop(sf::RenderWindow* janela);
@@ -36,14 +39,19 @@ public:
 
 		
 	PacMan* getPacMan();
+	//int play_sfx(SOUND_FX som);
+	
 	int* getBufferX() { return &bufferMOVX; }
 	int* getBufferY() { return &bufferMOVY; }
 	int* getMOVX() { return &MOVX; }
 	int* getMOVY() { return &MOVY; }
 	sf::Sprite* getMap() { return &SMapaBackground; }
 	float getFrameTime() { return timePerFrame.asSeconds(); }
+	//float getDeltaTime() { return deltaTime.asSeconds(); }
 
 private:
+
+	
 	Texturas temp;
 	//sf::Sprite sprite_personagem;
 	//sf::Texture textura_personagem;
@@ -61,9 +69,14 @@ private:
 	sf::Texture FantasmaTexture;
 	//coisa
 	int selectedItemIndex;
-	sf::Time timePerFrame;
+
 	
 	
+	sf::Time timePerFrame;	
+	//SOUND_FX sound_fx;
+	SoundFX soundfx;
+
+
 	sf::Sprite fundo;
 	sf::Texture texturafundo;
 	std::vector<sf::Sprite> sprites_vector;
@@ -82,5 +95,8 @@ private:
 	int parouMOVX;
 	bool Action;
 	bool menuFechou;
+	//
+
+	
 };
 
