@@ -33,4 +33,5 @@ public:
 	bool colidiu(sf::Sprite objeto, int alpha);
 	void draw(sf::RenderWindow* janela);
 	void move(float MOVX, float MOVY, float time);
+	bool testaBuffer(float bufferMOVX, float bufferMOVY, sf::Sprite SMapaBackground);
 };

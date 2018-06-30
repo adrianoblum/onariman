@@ -22,6 +22,10 @@ Principal::Principal() : pauseMenu(SWIDTH, SHEIGHT)
 	testemask.setPosition(SWIDTH / 2, SHEIGHT / 2);
 	testemask.setScale(ESCALA_MAPA, ESCALA_MAPA);
 
+
+	timePerFrame = sf::seconds(1.0f / 60.0f); //60 fps
+
+
 	MOVX = 0;
 	MOVY = 0;
 	bufferMOVX = 0;
@@ -44,7 +48,6 @@ void Principal::loop(sf::RenderWindow* janela)
 	bool primeira = true;
 	bool OpenMenu = false;
 	bool debug_var = false;
-	sf::Time timePerFrame = sf::seconds(1.0f / 60.0f);
 	sf::Clock deltaClock;  
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 
@@ -146,50 +149,8 @@ void Principal::loop(sf::RenderWindow* janela)
 		{
 
 			timeSinceLastUpdate -= timePerFrame;
-			podeounao = testaBuffer();
-			if (podeounao)
-			{
-
-				MOVX = bufferMOVX;
-				MOVY = bufferMOVY;
-				//rotacao(MOVX, MOVY);
-				pacman.girar(MOVX, MOVY);
-				posPacman.girar(MOVX, MOVY);
-				
-			}
-			
-				posPacman.move(MOVX, MOVY, timePerFrame.asSeconds());
-				if (debug_var == true)
-				{
-					pacman.move(MOVX, MOVY, timePerFrame.asSeconds());
-					refresh_screen(janela);
-				}
-				else
-				{
-					if (!Collision::PixelPerfectTest(posPacman.Sboneco, SMapaBackground, 50))
-					{
-						primeira = true;
-						pacman.move(MOVX, MOVY, timePerFrame.asSeconds());
-						
-					}
-					else
-					{
-						
-						if (primeira)
-						{
-							posPacman.move(MOVX, MOVY, timePerFrame.asSeconds());
-							pacman.move(MOVX * 2, MOVY * 2, timePerFrame.asSeconds());
-							primeira = false;
-						}
-						else
-						{
-							
-							posPacman.move(-MOVX, -MOVY, timePerFrame.asSeconds());
-						}
-					}
-				}
-			}
-		//}
+			pacman.analisaMovimento(this);
+		}
 		
 		//posicao = sprite_personagem.getPosition();				
 		
@@ -221,31 +182,7 @@ void Principal::loop(sf::RenderWindow* janela)
 }
 
 
-bool Principal::testaBuffer()
-{
-	bool podeounao = true;
-	float movx=static_cast<float>(bufferMOVX)/60;
-	float movy=static_cast<float>(bufferMOVY)/60;
-	pacman.girar(movx, movy);
-	posPacman.girar(movx, movy);
-	//rotacao(movx, movy);
-	posPacman.move(movx*4, movy*4,1);
 
-	//testeboca.move(movx*4, movy*4);
-	if (posPacman.colidiu(SMapaBackground,50))
-	{
-		podeounao = false;
-
-	}	
-	pacman.girar(MOVX, MOVY);
-	posPacman.girar(MOVX, MOVY);
-	posPacman.move(-movx*4, -movy*4, 1);
-
-	return podeounao;
-
-
-
-}
 
 
 
@@ -282,4 +219,9 @@ void Principal::refresh_screen(sf::RenderWindow* janela)
 	posPacman.draw(janela);
 	janela->display();
 
+}
+
+PacMan* Principal::getPacMan()
+{
+	return &pacman;
 }

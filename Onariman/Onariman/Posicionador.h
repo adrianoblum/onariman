@@ -1,6 +1,6 @@
 ﻿#pragma once
-#include <future>
-#include "PacMan.h"
+#include "Boneco.h"
+
 
 class Posicionador: public Boneco
 {

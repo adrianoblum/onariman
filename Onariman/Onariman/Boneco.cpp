@@ -93,3 +93,5 @@ void Boneco::move(float MOVX, float MOVY, float time)
 	Sboneco.move(MOVX*time, MOVY*time);
 
 }
+
+

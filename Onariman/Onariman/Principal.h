@@ -2,8 +2,9 @@
 #include "Texturas.h"
 #include "Ponto.h"
 #include "Pause.h"
-#include "PacMan.h"
+
 #include "Posicionador.h"
+#include "PacMan.h"
 
 #define SWIDTH 1680
 #define SHEIGHT 1050
@@ -11,7 +12,10 @@
 #define ESCALA_IMG 0.18f
 #define ESCALA_MAPA (ESCALA_IMG*6.818181f)
 #define MOV_SPEED (ESCALA_IMG*1363.636363f)
+//#define MOV_SPEED 250
 #define FATOR (ESCALA_IMG*9.090909)
+
+
 
 class Principal
 {
@@ -20,7 +24,6 @@ public:
 	~Principal();
 	void loop(sf::RenderWindow* janela);
 	void mover_teste(sf::Time frame);
-	bool testaBuffer();
 	void carrega_texto_temp();
 	void refresh_screen(sf::RenderWindow* janela);
 	bool selection(sf::RenderWindow* janela);
@@ -30,6 +33,16 @@ public:
 	int GetPressedItem() { return selectedItemIndex; }
 	int play_music();
 	int fim;
+
+		
+	PacMan* getPacMan();
+	int* getBufferX() { return &bufferMOVX; }
+	int* getBufferY() { return &bufferMOVY; }
+	int* getMOVX() { return &MOVX; }
+	int* getMOVY() { return &MOVY; }
+	sf::Sprite* getMap() { return &SMapaBackground; }
+	float getFrameTime() { return timePerFrame.asSeconds(); }
+
 private:
 	Texturas temp;
 	//sf::Sprite sprite_personagem;
@@ -48,7 +61,7 @@ private:
 	sf::Texture FantasmaTexture;
 	//coisa
 	int selectedItemIndex;
-	
+	sf::Time timePerFrame;
 	
 	
 	sf::Sprite fundo;
