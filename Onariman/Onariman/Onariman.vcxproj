@@ -23,7 +23,7 @@
     <ProjectGuid>{6C8BA221-B468-4563-A110-823CA6DC88F9}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Onariman</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -146,12 +146,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animacao.cpp" />
+    <ClCompile Include="Blinky.cpp" />
     <ClCompile Include="Boneco.cpp" />
+    <ClCompile Include="Clyde.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="Inky.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="PacMan.cpp" />
     <ClCompile Include="Pause.cpp" />
+    <ClCompile Include="Pinky.cpp" />
     <ClCompile Include="Ponto.cpp" />
     <ClCompile Include="Posicionador.cpp" />
     <ClCompile Include="Principal.cpp" />
@@ -160,11 +164,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animacao.h" />
+    <ClInclude Include="Blinky.h" />
     <ClInclude Include="Boneco.h" />
+    <ClInclude Include="Clyde.h" />
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="Inky.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="PacMan.h" />
     <ClInclude Include="Pause.h" />
+    <ClInclude Include="Pinky.h" />
     <ClInclude Include="Ponto.h" />
     <ClInclude Include="Posicionador.h" />
     <ClInclude Include="Principal.h" />
